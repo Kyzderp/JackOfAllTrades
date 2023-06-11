@@ -698,7 +698,7 @@ function JackOfAllTrades.InitEvents()
 
 	-- Is called whenever you press 'E'
 	-- For fishing, treasureHunter, gathering nodes etc.
-	ZO_PreHook(FISHING_MANAGER, "StartInteraction", OnInteractKeyPressed)
+	ZO_PreHook(INTERACTIVE_WHEEL_MANAGER, "StartInteraction", OnInteractKeyPressed)
 
 	-- To check when the player crouches in order to slot sustaining shadows
 	EM:RegisterForEvent(name, EVENT_STEALTH_STATE_CHANGED, OnSneakStateChanged)
