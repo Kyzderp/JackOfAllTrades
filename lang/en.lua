@@ -98,7 +98,7 @@ ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_HM_CABINET", "Cabinet")
 ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_HM_D_JUG", "Dwemer Jug")
 ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_HM_D_JUG_L", "Large Dwemer Jug")
 ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_HM_D_POT", "Dwemer Pot")
-ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_HM_THIEVES_T", "Thieves Throve")
+ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_HM_THIEVES_T", "Thieves Trove")
 ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_HM_SAFEBOX", "Safebox")
 ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_HM_COFFER", "Coffer")
 
