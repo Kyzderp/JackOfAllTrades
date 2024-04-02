@@ -1,5 +1,10 @@
 local EM = EVENT_MANAGER
 local name = JackOfAllTrades.name
+
+local chat
+if (LibChatMessage) then
+	chat = LibChatMessage("JackOfAllTrades", "JoAT")
+end
 local BLACKROSE_ZONE_INDEX = 678
 
 local skillData = {
@@ -113,9 +118,17 @@ local skillNotificationMessageQueue = {
 
 local cooldownOverMsgQueued = false
 
+local function PrintMessage(message)
+	if (chat) then
+		chat:Printf(message)
+	else
+		CHAT_SYSTEM:AddMessage(message)
+	end
+end
+
 function JackOfAllTrades.sendCooldownOverMessage()
 	local texture = CPTexture.craft
-	CHAT_SYSTEM:AddMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. GetString(SI_JACK_OF_ALL_TRADES_COOLDOWN_OVER) .. ".") 
+	PrintMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. GetString(SI_JACK_OF_ALL_TRADES_COOLDOWN_OVER) .. ".") 
 end
 
 local function SendNotification(variableSkillName)
@@ -125,26 +138,26 @@ local function SendNotification(variableSkillName)
 		if JackOfAllTrades.savedVariables.textureNotification then texture = CPTexture.craft end
 		if JackOfAllTrades.GetCurrentCooldown() == 30 or JackOfAllTrades.GetCurrentCooldown() == 0 then
 			if alertNotification then ZO_Alert(ERROR, nil, (JackOfAllTrades.savedVariables.colour.notifications .. texture .. ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)) .. " " .. GetString(SI_JACK_OF_ALL_TRADES_SLOTTED) .. ".")) return end
-			CHAT_SYSTEM:AddMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)) .. " " .. GetString(SI_JACK_OF_ALL_TRADES_SLOTTED) .. ".") 
+			PrintMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)) .. " " .. GetString(SI_JACK_OF_ALL_TRADES_SLOTTED) .. ".") 
 			return
 		else
 			if JackOfAllTrades.savedVariables.slotSkillsAfterCooldownEnds then
 				if alertNotification then 
 					ZO_Alert(ERROR, nil, JackOfAllTrades.savedVariables.colour.notifications .. texture .. ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)) .. " " .. zo_strformat(SI_JACK_OF_ALL_TRADES_DELAYED_SLOTTED, JackOfAllTrades.GetCurrentCooldown()) .. ".") 
 				else
-					CHAT_SYSTEM:AddMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)) .. " " .. zo_strformat(SI_JACK_OF_ALL_TRADES_DELAYED_SLOTTED, JackOfAllTrades.GetCurrentCooldown()) .. ".") 
+					PrintMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)) .. " " .. zo_strformat(SI_JACK_OF_ALL_TRADES_DELAYED_SLOTTED, JackOfAllTrades.GetCurrentCooldown()) .. ".") 
 				end
 				if skillNotificationMessageQueue[variableSkillName] then return end
 				skillNotificationMessageQueue[variableSkillName] = true
 				return
 			else
 				if alertNotification then ZO_Alert(ERROR, nil, JackOfAllTrades.savedVariables.colour.notifications .. texture .. ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)) .. " " .. zo_strformat(SI_JACK_OF_ALL_TRADES_COOLDOWN_DISABLED, JackOfAllTrades.GetCurrentCooldown()) .. ".")
-				else CHAT_SYSTEM:AddMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)) .. " " .. zo_strformat(SI_JACK_OF_ALL_TRADES_COOLDOWN_DISABLED, JackOfAllTrades.GetCurrentCooldown()) .. ".")  end
+				else PrintMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)) .. " " .. zo_strformat(SI_JACK_OF_ALL_TRADES_COOLDOWN_DISABLED, JackOfAllTrades.GetCurrentCooldown()) .. ".")  end
 				if JackOfAllTrades.savedVariables.altertedAfterCooldownOver and not cooldownOverMsgQueued then 
 					cooldownOverMsgQueued = true
 					zo_callLater(function() 
 						cooldownOverMsgQueued = false 
-						CHAT_SYSTEM:AddMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. GetString(SI_JACK_OF_ALL_TRADES_COOLDOWN_OVER) .. ".")  end, JackOfAllTrades.GetCurrentCooldown()*1000) 
+						PrintMessage(JackOfAllTrades.savedVariables.colour.notifications .. texture .. GetString(SI_JACK_OF_ALL_TRADES_COOLDOWN_OVER) .. ".")  end, JackOfAllTrades.GetCurrentCooldown()*1000) 
 				end 
 				JackOfAllTrades.resetSkillQueue() -- If we don't want to slot the skill after the cooldown ends then we don't want anything in the skill queue.
 				return
@@ -181,7 +194,7 @@ local function SendWarning(variableSkillName)
 		if JackOfAllTrades.savedVariables.warnings[variableSkillName] then
 			local texture = CPTexture.craft 
 			if JackOfAllTrades.savedVariables.alertWarning then ZO_Alert(ERROR, nil ,JackOfAllTrades.savedVariables.colour.warnings .. texture .. zo_strformat(SI_JACK_OF_ALL_TRADES_NOT_ENOUGH_POINTS_WARNING, ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id))))
-			else CHAT_SYSTEM:AddMessage(JackOfAllTrades.savedVariables.colour.warnings .. texture .. zo_strformat(SI_JACK_OF_ALL_TRADES_NOT_ENOUGH_POINTS_WARNING, ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)))) end
+			else PrintMessage(JackOfAllTrades.savedVariables.colour.warnings .. texture .. zo_strformat(SI_JACK_OF_ALL_TRADES_NOT_ENOUGH_POINTS_WARNING, ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)))) end
 		end
 		
 	end

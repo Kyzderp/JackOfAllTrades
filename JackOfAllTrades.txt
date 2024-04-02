@@ -6,6 +6,7 @@
 ## Description: |c9CD04CAutomatically adjusts your green champion bar depending on what you are doing, and sets it back to normal right after.         |rWill not respec your champion points or charge you 3000 gold.
 ## SavedVariables: JackOfAllTradesData
 ## DependsOn: LibAddonMenu-2.0>=32
+## OptionalDependsOn: LibChatMessage
 ##
 ## This Add-on is not created by, affiliated with or sponsored by ZeniMax Media
 ## Inc. or its affiliates. The Elder Scrolls® and related logos are registered
