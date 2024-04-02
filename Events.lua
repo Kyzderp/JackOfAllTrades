@@ -79,6 +79,7 @@ local rationer = skillData.rationer
 local liquidEfficiency = skillData.liquidEfficiency
 local giftedRider = skillData.giftedRider
 local warMount = skillData.warMount
+local sustainingShadows = skillData.sustainingShadows
 
 local CPTexture = {
 	craft = "|t24:24:esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t",
@@ -419,12 +420,12 @@ local function isTrashPotion(itemLink)
 end
 
 local function QuickSlotChanged(e, slot)
-	itemLink = GetSlotItemLink(slot, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
+	local itemLink = GetSlotItemLink(slot, HOTBAR_CATEGORY_QUICKSLOT_WHEEL)
 
 	-- Trash pot check
 	if not JackOfAllTrades.savedVariables.slotLeTrashPots and isTrashPotion(itemLink) then return false end
 
-	consumableType, _ = GetItemLinkItemType(itemLink)
+	local consumableType, _ = GetItemLinkItemType(itemLink)
 	-- Check if we need to do anything
 	if consumableType ~= ITEMTYPE_FOOD and consumableType ~= ITEMTYPE_DRINK and consumableType ~= ITEMTYPE_POTION and consumableType ~= ITEMTYPE_POTION_BASE then return false end
 	if not JackOfAllTrades.savedVariables.enable.rationer and not JackOfAllTrades.savedVariables.enable.liquidEfficiency then return end
@@ -537,7 +538,7 @@ function JackOfAllTrades.getHomemakerLootables()
 		SI_JACK_OF_ALL_TRADES_HM_SAFEBOX,
 		SI_JACK_OF_ALL_TRADES_HM_COFFER
 	}
-	output = ''
+	local output = ''
 	for _, text in pairs(homemakerSlottables) do
 		output = output .. '\n' .. GetString(text)
 	end
