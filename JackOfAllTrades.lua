@@ -4,7 +4,7 @@
 JackOfAllTrades = {
 	name = "JackOfAllTrades",
 	author = '@CyberOnEso, @MMasing',
-	version = '1.2.29',
+	version = '1.2.30',
 	requiredAPIVersion = 100035
 }
 
@@ -338,10 +338,49 @@ function JackOfAllTrades.AttemptToAllocatePointsIntoCP(championSkillId)
 	end
 end
 
+--[[
+/script for i = 1, 6 do local id = GetSelectionCampaignId(i) d(GetCampaignName(id), id, GetCampaignRulesetId(id), GetCampaignRulesetDescription(GetCampaignRulesetId(id)), "---") end
+
+	PTS
+	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
+	Blackreach = CampaignId: 101 RulesetId: 25 CP: YES
+
+	NA
+	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
+	No-CP Imperial City = CampaignId: 96 RulesetId: 24 CP: NO
+	Blackreach = CampaignId: 101 RulesetId: 25 CP: YES
+	Gray Host = CampaignId: 102 RulesetId: 14 CP: YES
+	Ravenwatch = CampaignId: 103 RulesetId: 22 CP: NO
+	Icereach = CampaignId: 104 RulesetId: 15 CP: NO
+
+	EU
+	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
+	No-CP Imperial City = CampaignId: 96 RulesetId: 24 CP: NO
+	Blackreach = CampaignId: 101 RulesetId: 25 CP: YES
+	Gray Host = CampaignId: 102 RulesetId: 14 CP: YES
+	Ravenwatch = CampaignId: 103 RulesetId: 22 CP: NO
+	Icereach = CampaignId: 104 RulesetId: 15 CP: NO
+]]
+-- Neither of the APIs that look like they should be able to detect CP-enabled campaigns seem to
+-- work, so this is a hack around that, based on each campaign's ruleset ID
+-- https://www.esoui.com/forums/showthread.php?t=10933
+-- This will need to be adjusted if a Cyro event goes live
+local function IsCPEnabledInCampaign()
+	local rulesetId = GetCampaignRulesetId(GetCurrentCampaignId())
+	if (rulesetId == 24 or rulesetId == 22 or rulesetId == 15) then
+		return false
+	end
+	return true
+end
+
 -- Adds the CP node the the queue of stars to be slotted, when the player is off cooldown these stars can be slotted
 function JackOfAllTrades.AddCPNodeToQueue(skillId, skillIndex)
 	-- Check if it is a valid skillIndex
 	if skillIndex ~= 1 and skillIndex ~= 2 and skillIndex ~= 3 and skillIndex ~= 4 then d("Skill needs to be added to either index 3 or 4") return false end
+
+	-- Check if CP is even enabled in this area
+	if (IsActiveWorldBattleground()) then return false end
+	if ((IsInAvAZone() or IsInImperialCity()) and not IsCPEnabledInCampaign()) then return false end
 
 	-- Check if the skill is already slotted
 	if isCPSlotted(skillId) then return false end
