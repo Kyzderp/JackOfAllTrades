@@ -4,7 +4,7 @@
 JackOfAllTrades = {
 	name = "JackOfAllTrades",
 	author = '@CyberOnEso, @MMasing',
-	version = '1.2.30',
+	version = '1.2.31',
 	requiredAPIVersion = 100035
 }
 
@@ -339,7 +339,7 @@ function JackOfAllTrades.AttemptToAllocatePointsIntoCP(championSkillId)
 end
 
 --[[
-/script for i = 1, 6 do local id = GetSelectionCampaignId(i) d(GetCampaignName(id), id, GetCampaignRulesetId(id), GetCampaignRulesetDescription(GetCampaignRulesetId(id)), "---") end
+/script for i = 1, 13 do local id = GetSelectionCampaignId(i) d(GetCampaignName(id), id, GetCampaignRulesetId(id), GetCampaignRulesetDescription(GetCampaignRulesetId(id)), "---") end
 
 	PTS
 	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
@@ -352,6 +352,23 @@ end
 	Gray Host = CampaignId: 102 RulesetId: 14 CP: YES
 	Ravenwatch = CampaignId: 103 RulesetId: 22 CP: NO
 	Icereach = CampaignId: 104 RulesetId: 15 CP: NO
+
+	NA - Mayhem
+	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
+	No-CP Imperial City = CampaignId: 96 RulesetId: 24 CP: NO
+	Blackreach = CampaignId: 101 RulesetId: 25 CP: YES
+	Gray Host = CampaignId: 102 RulesetId: 14 CP: YES
+	Ravenwatch = CampaignId: 103 RulesetId: 22 CP: NO
+	Icereach = CampaignId: 104 RulesetId: 15 CP: NO
+
+	Evergloam = CampaignId: 105 RulesetId: 17 CP: YES
+	Ashpit = CampaignId: 106 RulesetId: 17 CP: YES
+	Quagmire = CampaignId: 111 RulesetId: 18 CP: NO
+	Fields of Regret = CampaignId: 112 RulesetId: 18 CP: NO
+	Legion Zero = CampaignId: 116 RulesetId: 24 CP: NO
+	Dragonfire = CampaignId: 119 RulesetId: 23 CP: YES
+	Coldharbour = CampaignId: 122 RulesetId: 15 CP: NO
+
 
 	EU
 	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
@@ -367,7 +384,7 @@ end
 -- This will need to be adjusted if a Cyro event goes live
 local function IsCPEnabledInCampaign()
 	local rulesetId = GetCampaignRulesetId(GetCurrentCampaignId())
-	if (rulesetId == 24 or rulesetId == 22 or rulesetId == 15) then
+	if (rulesetId == 24 or rulesetId == 22 or rulesetId == 15 or rulesetId == 18) then
 		return false
 	end
 	return true
@@ -433,7 +450,7 @@ end
 -------------------------------------------------------------------------------------------------
 -- When addon is first loaded --
 -------------------------------------------------------------------------------------------------
-function AddonLoaded(e, addonName)
+local function AddonLoaded(e, addonName)
 	if addonName ~= name then return end
 
 	Initialize()
@@ -442,7 +459,7 @@ end
 local oldZoneId = 0
 
 local function DidZoneChange()
-	newZoneId = GetZoneId(GetUnitZoneIndex('player'))
+	local newZoneId = GetZoneId(GetUnitZoneIndex('player'))
 	if newZoneId == oldZoneId then
 		return false
 	end
