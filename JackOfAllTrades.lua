@@ -4,7 +4,7 @@
 JackOfAllTrades = {
 	name = "JackOfAllTrades",
 	author = '@CyberOnEso, @MMasing',
-	version = '1.2.31',
+	version = '1.2.32',
 	requiredAPIVersion = 100035
 }
 
@@ -338,58 +338,6 @@ function JackOfAllTrades.AttemptToAllocatePointsIntoCP(championSkillId)
 	end
 end
 
---[[
-/script for i = 1, 13 do local id = GetSelectionCampaignId(i) d(GetCampaignName(id), id, GetCampaignRulesetId(id), GetCampaignRulesetDescription(GetCampaignRulesetId(id)), "---") end
-
-	PTS
-	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
-	Blackreach = CampaignId: 101 RulesetId: 25 CP: YES
-
-	NA
-	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
-	No-CP Imperial City = CampaignId: 96 RulesetId: 24 CP: NO
-	Blackreach = CampaignId: 101 RulesetId: 25 CP: YES
-	Gray Host = CampaignId: 102 RulesetId: 14 CP: YES
-	Ravenwatch = CampaignId: 103 RulesetId: 22 CP: NO
-	Icereach = CampaignId: 104 RulesetId: 15 CP: NO
-
-	NA - Mayhem
-	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
-	No-CP Imperial City = CampaignId: 96 RulesetId: 24 CP: NO
-	Blackreach = CampaignId: 101 RulesetId: 25 CP: YES
-	Gray Host = CampaignId: 102 RulesetId: 14 CP: YES
-	Ravenwatch = CampaignId: 103 RulesetId: 22 CP: NO
-	Icereach = CampaignId: 104 RulesetId: 15 CP: NO
-
-	Evergloam = CampaignId: 105 RulesetId: 17 CP: YES
-	Ashpit = CampaignId: 106 RulesetId: 17 CP: YES
-	Quagmire = CampaignId: 111 RulesetId: 18 CP: NO
-	Fields of Regret = CampaignId: 112 RulesetId: 18 CP: NO
-	Legion Zero = CampaignId: 116 RulesetId: 24 CP: NO
-	Dragonfire = CampaignId: 119 RulesetId: 23 CP: YES
-	Coldharbour = CampaignId: 122 RulesetId: 15 CP: NO
-
-
-	EU
-	CP Imperial City = CampaignId: 95 RulesetId: 23 CP: YES
-	No-CP Imperial City = CampaignId: 96 RulesetId: 24 CP: NO
-	Blackreach = CampaignId: 101 RulesetId: 25 CP: YES
-	Gray Host = CampaignId: 102 RulesetId: 14 CP: YES
-	Ravenwatch = CampaignId: 103 RulesetId: 22 CP: NO
-	Icereach = CampaignId: 104 RulesetId: 15 CP: NO
-]]
--- Neither of the APIs that look like they should be able to detect CP-enabled campaigns seem to
--- work, so this is a hack around that, based on each campaign's ruleset ID
--- https://www.esoui.com/forums/showthread.php?t=10933
--- This will need to be adjusted if a Cyro event goes live
-local function IsCPEnabledInCampaign()
-	local rulesetId = GetCampaignRulesetId(GetCurrentCampaignId())
-	if (rulesetId == 24 or rulesetId == 22 or rulesetId == 15 or rulesetId == 18) then
-		return false
-	end
-	return true
-end
-
 -- Adds the CP node the the queue of stars to be slotted, when the player is off cooldown these stars can be slotted
 function JackOfAllTrades.AddCPNodeToQueue(skillId, skillIndex)
 	-- Check if it is a valid skillIndex
@@ -397,7 +345,7 @@ function JackOfAllTrades.AddCPNodeToQueue(skillId, skillIndex)
 
 	-- Check if CP is even enabled in this area
 	if (IsActiveWorldBattleground()) then return false end
-	if ((IsInAvAZone() or IsInImperialCity()) and not IsCPEnabledInCampaign()) then return false end
+	if ((IsInAvAZone() or IsInImperialCity()) and not DoesCurrentCampaignRulesetAllowChampionPoints()) then return false end
 
 	-- Check if the skill is already slotted
 	if isCPSlotted(skillId) then return false end
