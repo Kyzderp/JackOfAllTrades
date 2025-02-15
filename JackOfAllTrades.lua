@@ -4,8 +4,7 @@
 JackOfAllTrades = {
 	name = "JackOfAllTrades",
 	author = '@CyberOnEso, @MMasing',
-	version = '1.2.32',
-	requiredAPIVersion = 100035
+	version = '1.2.33',
 }
 
 JackOfAllTrades.colours = {
@@ -339,6 +338,7 @@ function JackOfAllTrades.AttemptToAllocatePointsIntoCP(championSkillId)
 end
 
 -- Adds the CP node the the queue of stars to be slotted, when the player is off cooldown these stars can be slotted
+-- Returns true if it is queued, false if it cannot be slotted, or nil if not enough points are allocated
 function JackOfAllTrades.AddCPNodeToQueue(skillId, skillIndex)
 	-- Check if it is a valid skillIndex
 	if skillIndex ~= 1 and skillIndex ~= 2 and skillIndex ~= 3 and skillIndex ~= 4 then d("Skill needs to be added to either index 3 or 4") return false end
@@ -353,6 +353,12 @@ function JackOfAllTrades.AddCPNodeToQueue(skillId, skillIndex)
 	-- Check if we have enough points in the star to slot it
 	--if not CPData:GetChampionSkillData(skillId):CanBeSlotted() then return nil end
 	if GetNumPointsSpentOnChampionSkill(skillId) < RequiredPoints(skillId) then return nil end
+
+	-- Check if the skill is a slottable. This is a temporary stopgap for U45 before we move the new passives into separate settings
+	-- This goes after the "enough points" check so that the user still gets a warning if they don't have enough points into the passive
+	if (not CanChampionSkillTypeBeSlotted(GetChampionSkillType(skillId))) then
+		return false
+	end
 
 	-- Check if the skill already exists in the queue
 	for _, id in pairs(skillQueue) do
