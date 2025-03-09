@@ -347,18 +347,20 @@ function JackOfAllTrades.AddCPNodeToQueue(skillId, skillIndex)
 	if (IsActiveWorldBattleground()) then return false end
 	if ((IsInAvAZone() or IsInImperialCity()) and not DoesCurrentCampaignRulesetAllowChampionPoints()) then return false end
 
+	-- For passive skills (post-U45), check if the max points are allocated
+	if (not CanChampionSkillTypeBeSlotted(GetChampionSkillType(skillId))) then
+		if (GetNumPointsSpentOnChampionSkill(skillId) < GetMaxPossiblePointsInChampionSkill(skillId)) then
+			return nil
+		end
+		return false
+	end
+
 	-- Check if the skill is already slotted
 	if isCPSlotted(skillId) then return false end
 
 	-- Check if we have enough points in the star to slot it
 	--if not CPData:GetChampionSkillData(skillId):CanBeSlotted() then return nil end
 	if GetNumPointsSpentOnChampionSkill(skillId) < RequiredPoints(skillId) then return nil end
-
-	-- Check if the skill is a slottable. This is a temporary stopgap for U45 before we move the new passives into separate settings
-	-- This goes after the "enough points" check so that the user still gets a warning if they don't have enough points into the passive
-	if (not CanChampionSkillTypeBeSlotted(GetChampionSkillType(skillId))) then
-		return false
-	end
 
 	-- Check if the skill already exists in the queue
 	for _, id in pairs(skillQueue) do

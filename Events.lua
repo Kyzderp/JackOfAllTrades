@@ -10,63 +10,63 @@ local BLACKROSE_ZONE_INDEX = 678
 local skillData = {
 	professionalUpkeep = {
 		id = 1,
-		index = 4
+		index = 4,
 	},
 	meticulousDisassembly = {
 		id = 83,
-		index = 4
+		index = 4,
 	},
 	masterGatherer = {
 		id = 78,
-		index = 4
+		index = 4,
 	},
 	plentifulHarvest = {
 		id = 81,
-		index = 3
+		index = 3,
 	},
 	treasureHunter = {
 		id = 79,
-		index = 4
+		index = 4,
 	},
 	homemaker = {
 		id = 91,
-		index = 3
+		index = 3,
 	},
 	reelTechnique = {
 		id = 88,
-		index = 4
+		index = 4,
 	},
 	anglersInstinct = {
 		id = 89,
-		index = 3
+		index = 3,
 	},
 	cutpursesArt = {
 		id = 90,
-		index = 4
+		index = 4,
 	},
 	infamous = {
 		id = 77,
-		index = 4
+		index = 4,
 	},
 	rationer = {
 		id = 85,
-		index = 4
+		index = 4,
 	},
 	liquidEfficiency = {
 		id = 86,
-		index = 3
+		index = 3,
 	},
 	giftedRider = {
 		id = 92,
-		index = 4
+		index = 4,
 	},
 	warMount = {
 		id = 82,
-		index = 3
+		index = 3,
 	},
 	sustainingShadows = {
 		id = 65,
-		index = 3
+		index = 3,
 	}
 }
 
@@ -169,32 +169,43 @@ end
 local skillNamesQueue = {}
 local function SendWarning(variableSkillName)
 	if not DoesCurrentCampaignRulesetAllowChampionPoints() then return false end
+
+	local championSkill = skillData[variableSkillName]
+	local isSlottable = CanChampionSkillTypeBeSlotted(GetChampionSkillType())
 	
 	-- Try allocating points then slot it
-	if JackOfAllTrades.AttemptToAllocatePointsIntoCP(skillData[variableSkillName].id) then
-		zo_callLater(function ()
-			local skillId = skillData[variableSkillName].id
-			local skillIndex = skillData[variableSkillName].index
-			local result = JackOfAllTrades.AddCPNodeToQueue(skillId, skillIndex)
-			skillNamesQueue[#skillNamesQueue+1] = variableSkillName
+	if JackOfAllTrades.AttemptToAllocatePointsIntoCP(championSkill.id) then
+		if (isSlottable) then
 			zo_callLater(function ()
-				if result then
-					local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-					if slotResult ~= false then
-						for i, name in ipairs(skillNamesQueue) do
-							SendNotification(name)
+				local skillId = championSkill.id
+				local skillIndex = championSkill.index
+				local result = JackOfAllTrades.AddCPNodeToQueue(skillId, skillIndex)
+				skillNamesQueue[#skillNamesQueue+1] = variableSkillName
+				zo_callLater(function ()
+					if result then
+						local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
+						if slotResult ~= false then
+							for i, name in ipairs(skillNamesQueue) do
+								SendNotification(name)
+							end
+							skillNamesQueue = {}
 						end
-						skillNamesQueue = {}
 					end
-				end
+				end, 200)
 			end, 200)
-		end, 200)
+		end
 	else
 	
 		if JackOfAllTrades.savedVariables.warnings[variableSkillName] then
-			local texture = CPTexture.craft 
-			if JackOfAllTrades.savedVariables.alertWarning then ZO_Alert(ERROR, nil ,JackOfAllTrades.savedVariables.colour.warnings .. texture .. zo_strformat(SI_JACK_OF_ALL_TRADES_NOT_ENOUGH_POINTS_WARNING, ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id))))
-			else PrintMessage(JackOfAllTrades.savedVariables.colour.warnings .. texture .. zo_strformat(SI_JACK_OF_ALL_TRADES_NOT_ENOUGH_POINTS_WARNING, ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(skillData[variableSkillName].id)))) end
+			local texture = CPTexture.craft
+			local textFormat = isSlottable and SI_JACK_OF_ALL_TRADES_NOT_ENOUGH_POINTS_WARNING or SI_JACK_OF_ALL_TRADES_NOT_MAX_POINTS_WARNING
+			local warningText = JackOfAllTrades.savedVariables.colour.warnings .. texture .. zo_strformat(textFormat, ZO_CachedStrFormat(SI_CHAMPION_STAR_NAME, GetChampionSkillName(championSkill.id)))
+
+			if JackOfAllTrades.savedVariables.alertWarning then
+				ZO_Alert(ERROR, nil, warningText)
+			else
+				PrintMessage(warningText)
+			end
 		end
 		
 	end
@@ -250,12 +261,7 @@ local function OpenStore(e)
 	if GetRepairAllCost() == 0 then return false end
 	if not JackOfAllTrades.savedVariables.enable.professionalUpkeep then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(professionalUpkeep.id, professionalUpkeep.index)
-	if result then
-		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-		if slotResult ~= false then
-			SendNotification("professionalUpkeep")
-		end
-	elseif result == nil then
+	if result == nil then
 		SendWarning("professionalUpkeep")
 	end
 end
@@ -278,7 +284,6 @@ local function StartGathering()
 		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
 		if slotResult ~= false then
 			if masterGathererResult then SendNotification("masterGatherer") end
-			if plentifulHarvestResult then SendNotification("plentifulHarvest") end
 		end
 	end
 
@@ -311,12 +316,7 @@ local function StartLooting()
 	if JackOfAllTrades.savedVariables.thHmPair then SlotThHmPair() return false end
 	if not JackOfAllTrades.savedVariables.enable.homemaker then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(homemaker.id, homemaker.index)
-	if result then
-		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-		if slotResult ~= false then
-			SendNotification("homemaker")
-		end
-	elseif result == nil then
+	if result == nil then
 		SendWarning("homemaker")
 	end
 end
@@ -325,12 +325,7 @@ local function StartOpeningChest()
 	if JackOfAllTrades.savedVariables.thHmPair then SlotThHmPair() return false end
 	if not JackOfAllTrades.savedVariables.enable.treasureHunter then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(treasureHunter.id, treasureHunter.index)
-	if result then
-		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-		if slotResult ~= false then
-			SendNotification("treasureHunter")
-		end
-	elseif result == nil then
+	if result == nil then
 		SendWarning("treasureHunter")
 	end
 end
@@ -338,12 +333,7 @@ end
 local function StartPickpocketing()
 	if not JackOfAllTrades.savedVariables.enable.cutpursesArt then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(cutpursesArt.id, cutpursesArt.index)
-	if result then
-		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-		if slotResult ~= false then
-			SendNotification("cutpursesArt")
-		end
-	elseif result == nil then
+	if result == nil then
 		SendWarning("cutpursesArt")
 	end
 end
@@ -351,12 +341,7 @@ end
 local function OpenFence()
 	if not JackOfAllTrades.savedVariables.enable.infamous then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(infamous.id, infamous.index)
-	if result then
-		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-		if slotResult ~= false then
-			SendNotification("infamous")
-		end
-	elseif result == nil then
+	if result == nil then
 		SendWarning("infamous")
 	end
 end
@@ -382,13 +367,7 @@ local function OpenCraftingStation(e, craft_skill, craft_type)
 
 	local result = JackOfAllTrades.AddCPNodeToQueue(meticulousDisassembly.id, meticulousDisassembly.index)
 	
-	if result then
-		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-		if slotResult ~= false then 
-			SendNotification("meticulousDisassembly")
-		end
-	elseif result == nil then
-
+	if result == nil then
 		SendWarning("meticulousDisassembly")
 	end
 end
@@ -453,14 +432,6 @@ local function QuickSlotChanged(e, slot)
 	if JackOfAllTrades.savedVariables.enable.liquidEfficiency and (consumableType == ITEMTYPE_POTION or consumableType == ITEMTYPE_POTION_BASE) then
 		liquidEfficiencyResult = JackOfAllTrades.AddCPNodeToQueue(liquidEfficiency.id, liquidEfficiency.index)
 	end
-
-	if rationerResult or liquidEfficiencyResult then
-		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-		if slotResult ~= false then 
-			if rationerResult then SendNotification("rationer") end
-			if liquidEfficiencyResult then SendNotification("liquidEfficiency") end
-		end
-	end	
 
 	if rationerResult == nil then SendWarning("rationer") end
 	if liquidEfficiencyResult == nil then SendWarning("liquidEfficiency") end
@@ -617,12 +588,7 @@ end
 
 local function SlotRationer()
 	local result = JackOfAllTrades.AddCPNodeToQueue(rationer.id, rationer.index)
-	if result then
-		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-		if slotResult ~= false then
-			SendNotification("rationer")
-		end
-	elseif result == nil then
+	if result == nil then
 		SendWarning("rationer")
 	end
 end
@@ -638,12 +604,7 @@ local function PlayerEnteredDungeon()
 		if JackOfAllTrades.savedVariables.thHmPair then SlotThHmPair() return false end
 		if not JackOfAllTrades.savedVariables.enable.treasureHunter then return false end
 		local result = JackOfAllTrades.AddCPNodeToQueue(treasureHunter.id, treasureHunter.index)
-		if result then
-			local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-			if slotResult ~= false then
-				SendNotification("treasureHunter")
-			end
-		elseif result == nil then
+		if result == nil then
 			SendWarning("treasureHunter")
 		end
 	end
