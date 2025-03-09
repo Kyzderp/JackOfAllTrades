@@ -139,32 +139,6 @@ function JackOfAllTrades:InitMenu()
             controls = {
                 {
                     type = "custom",
-                    name = SI_JACK_OF_ALL_TRADES_MENU_CRAFTING,
-                    --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
-                    createFunc = function(customControl) 
-                        local wm = WINDOW_MANAGER
-                        customControl.header = wm:CreateControlFromVirtual(nil, customControl, "ZO_Options_SectionTitleLabel")
-                        local header = customControl.header
-                        --header:SetAnchor(TOPLEFT, divider, BOTTOMLEFT)
-                        header:SetAnchor(TOPLEFT)
-                        header:SetFont("ZoFontHeader2")
-                        header:SetText(GetString(SI_JACK_OF_ALL_TRADES_MENU_CRAFTING))
-                    end, -- function to call when this custom control was created (optional)
-                    refreshFunc = function(customControl) end, -- function to call when panel/controls refresh (optional)
-                    width = "full", -- or "half" (optional)
-                    minHeight = function() return 18 end, --or number for the minimum height of this control. Default: 26 (optional)
-                    maxHeight = function() return 18 end, --or number for the maximum height of this control. Default: 4 * minHeight (optional)
-                },
-                {   
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("meticulousDisassembly")),
-                    getFunc = function() return self.savedVariables.notification.meticulousDisassembly end,
-                    setFunc = function(value) self.savedVariables.notification.meticulousDisassembly = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("meticulousDisassembly"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "custom",
                     name = SI_JACK_OF_ALL_TRADES_MENU_HARVESTING,
                     --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
                     createFunc = function(customControl) 
@@ -187,48 +161,6 @@ function JackOfAllTrades:InitMenu()
                     getFunc = function() return self.savedVariables.notification.masterGatherer end,
                     setFunc = function(value) self.savedVariables.notification.masterGatherer = value end,
                     tooltip = GetChampionSkillDescription(self.GetSkillId("masterGatherer"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("plentifulHarvest")),
-                    getFunc = function() return self.savedVariables.notification.plentifulHarvest end,
-                    setFunc = function(value) self.savedVariables.notification.plentifulHarvest = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("plentifulHarvest"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "custom",
-                    name = SI_JACK_OF_ALL_TRADES_MENU_LOOTING,
-                    --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
-                    createFunc = function(customControl) 
-                        local wm = WINDOW_MANAGER
-                        customControl.header = wm:CreateControlFromVirtual(nil, customControl, "ZO_Options_SectionTitleLabel")
-                        local header = customControl.header
-                        --header:SetAnchor(TOPLEFT, divider, BOTTOMLEFT)
-                        header:SetAnchor(TOPLEFT)
-                        header:SetFont("ZoFontHeader2")
-                        header:SetText(GetString(SI_JACK_OF_ALL_TRADES_MENU_LOOTING))
-                    end, -- function to call when this custom control was created (optional)
-                    refreshFunc = function(customControl) end, -- function to call when panel/controls refresh (optional)
-                    width = "full", -- or "half" (optional)
-                    minHeight = function() return 18 end, --or number for the minimum height of this control. Default: 26 (optional)
-                    maxHeight = function() return 18 end, --or number for the maximum height of this control. Default: 4 * minHeight (optional)
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("treasureHunter")),
-                    getFunc = function() return self.savedVariables.notification.treasureHunter end,
-                    setFunc = function(value) self.savedVariables.notification.treasureHunter = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("treasureHunter"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("homemaker")),
-                    getFunc = function() return self.savedVariables.notification.homemaker end,
-                    setFunc = function(value) self.savedVariables.notification.homemaker = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("homemaker"), 1000),
                     width = "half"
                 },
                 {
@@ -285,22 +217,6 @@ function JackOfAllTrades:InitMenu()
                 },
                 {
                     type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("infamous")),
-                    getFunc = function() return self.savedVariables.notification.infamous end,
-                    setFunc = function(value) self.savedVariables.notification.infamous = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("infamous"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("cutpursesArt")),
-                    getFunc = function() return self.savedVariables.notification.cutpursesArt end,
-                    setFunc = function(value) self.savedVariables.notification.cutpursesArt = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("cutpursesArt"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
                     name = GetFormattedChampionSkillName(self.GetSkillId("sustainingShadows")),
                     getFunc = function() return self.savedVariables.notification.sustainingShadows end,
                     setFunc = function(value) self.savedVariables.notification.sustainingShadows = value end,
@@ -339,48 +255,6 @@ function JackOfAllTrades:InitMenu()
                     getFunc = function() return self.savedVariables.notification.warMount end,
                     setFunc = function(value) self.savedVariables.notification.warMount = value end,
                     tooltip = GetChampionSkillDescription(self.GetSkillId("warMount"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "custom",
-                    name = SI_JACK_OF_ALL_TRADES_MENU_MISC,
-                    --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
-                    createFunc = function(customControl) 
-                        local wm = WINDOW_MANAGER
-                        customControl.header = wm:CreateControlFromVirtual(nil, customControl, "ZO_Options_SectionTitleLabel")
-                        local header = customControl.header
-                        --header:SetAnchor(TOPLEFT, divider, BOTTOMLEFT)
-                        header:SetAnchor(TOPLEFT)
-                        header:SetFont("ZoFontHeader2")
-                        header:SetText(GetString(SI_JACK_OF_ALL_TRADES_MENU_MISC))
-                    end, -- function to call when this custom control was created (optional)
-                    refreshFunc = function(customControl) end, -- function to call when panel/controls refresh (optional)
-                    width = "full", -- or "half" (optional)
-                    minHeight = function() return 18 end, --or number for the minimum height of this control. Default: 26 (optional)
-                    maxHeight = function() return 18 end, --or number for the maximum height of this control. Default: 4 * minHeight (optional)
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("professionalUpkeep")),
-                    getFunc = function() return self.savedVariables.notification.professionalUpkeep end,
-                    setFunc = function(value) self.savedVariables.notification.professionalUpkeep = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("professionalUpkeep"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("rationer")),
-                    getFunc = function() return self.savedVariables.notification.rationer end,
-                    setFunc = function(value) self.savedVariables.notification.rationer = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("rationer"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("liquidEfficiency")),
-                    getFunc = function() return self.savedVariables.notification.liquidEfficiency end,
-                    setFunc = function(value) self.savedVariables.notification.liquidEfficiency = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("liquidEfficiency"), 1000),
                     width = "half"
                 },
             },
@@ -763,32 +637,6 @@ function JackOfAllTrades:InitMenu()
             controls = {
                 {
                     type = "custom",
-                    name = SI_JACK_OF_ALL_TRADES_MENU_CRAFTING,
-                    --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
-                    createFunc = function(customControl) 
-                        local wm = WINDOW_MANAGER
-                        customControl.header = wm:CreateControlFromVirtual(nil, customControl, "ZO_Options_SectionTitleLabel")
-                        local header = customControl.header
-                        --header:SetAnchor(TOPLEFT, divider, BOTTOMLEFT)
-                        header:SetAnchor(TOPLEFT)
-                        header:SetFont("ZoFontHeader2")
-                        header:SetText(GetString(SI_JACK_OF_ALL_TRADES_MENU_CRAFTING))
-                    end, -- function to call when this custom control was created (optional)
-                    refreshFunc = function(customControl) end, -- function to call when panel/controls refresh (optional)
-                    width = "full", -- or "half" (optional)
-                    minHeight = function() return 18 end, --or number for the minimum height of this control. Default: 26 (optional)
-                    maxHeight = function() return 18 end, --or number for the maximum height of this control. Default: 4 * minHeight (optional)
-                },
-                {   
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("meticulousDisassembly")),
-                    getFunc = function() return self.savedVariables.enable.meticulousDisassembly end,
-                    setFunc = function(value) self.savedVariables.enable.meticulousDisassembly = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("meticulousDisassembly"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "custom",
                     name = SI_JACK_OF_ALL_TRADES_MENU_HARVESTING,
                     --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
                     createFunc = function(customControl) 
@@ -811,48 +659,6 @@ function JackOfAllTrades:InitMenu()
                     getFunc = function() return self.savedVariables.enable.masterGatherer end,
                     setFunc = function(value) self.savedVariables.enable.masterGatherer = value end,
                     tooltip = GetChampionSkillDescription(self.GetSkillId("masterGatherer"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("plentifulHarvest")),
-                    getFunc = function() return self.savedVariables.enable.plentifulHarvest end,
-                    setFunc = function(value) self.savedVariables.enable.plentifulHarvest = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("plentifulHarvest"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "custom",
-                    name = SI_JACK_OF_ALL_TRADES_MENU_LOOTING,
-                    --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
-                    createFunc = function(customControl) 
-                        local wm = WINDOW_MANAGER
-                        customControl.header = wm:CreateControlFromVirtual(nil, customControl, "ZO_Options_SectionTitleLabel")
-                        local header = customControl.header
-                        --header:SetAnchor(TOPLEFT, divider, BOTTOMLEFT)
-                        header:SetAnchor(TOPLEFT)
-                        header:SetFont("ZoFontHeader2")
-                        header:SetText(GetString(SI_JACK_OF_ALL_TRADES_MENU_LOOTING))
-                    end, -- function to call when this custom control was created (optional)
-                    refreshFunc = function(customControl) end, -- function to call when panel/controls refresh (optional)
-                    width = "full", -- or "half" (optional)
-                    minHeight = function() return 18 end, --or number for the minimum height of this control. Default: 26 (optional)
-                    maxHeight = function() return 18 end, --or number for the maximum height of this control. Default: 4 * minHeight (optional)
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("treasureHunter")),
-                    getFunc = function() return self.savedVariables.enable.treasureHunter end,
-                    setFunc = function(value) self.savedVariables.enable.treasureHunter = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("treasureHunter"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("homemaker")),
-                    getFunc = function() return self.savedVariables.enable.homemaker end,
-                    setFunc = function(value) self.savedVariables.enable.homemaker = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("homemaker"), 1000),
                     width = "half"
                 },
                 {
@@ -909,22 +715,6 @@ function JackOfAllTrades:InitMenu()
                 },
                 {
                     type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("infamous")),
-                    getFunc = function() return self.savedVariables.enable.infamous end,
-                    setFunc = function(value) self.savedVariables.enable.infamous = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("infamous"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("cutpursesArt")),
-                    getFunc = function() return self.savedVariables.enable.cutpursesArt end,
-                    setFunc = function(value) self.savedVariables.enable.cutpursesArt = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("cutpursesArt"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
                     name = GetFormattedChampionSkillName(self.GetSkillId("sustainingShadows")),
                     getFunc = function() return self.savedVariables.enable.sustainingShadows end,
                     setFunc = function(value) self.savedVariables.enable.sustainingShadows = value end,
@@ -965,48 +755,6 @@ function JackOfAllTrades:InitMenu()
                     tooltip = GetChampionSkillDescription(self.GetSkillId("warMount"), 1000),
                     width = "half"
                 },
-                {
-                    type = "custom",
-                    name = SI_JACK_OF_ALL_TRADES_MENU_MISC,
-                    --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
-                    createFunc = function(customControl) 
-                        local wm = WINDOW_MANAGER
-                        customControl.header = wm:CreateControlFromVirtual(nil, customControl, "ZO_Options_SectionTitleLabel")
-                        local header = customControl.header
-                        --header:SetAnchor(TOPLEFT, divider, BOTTOMLEFT)
-                        header:SetAnchor(TOPLEFT)
-                        header:SetFont("ZoFontHeader2")
-                        header:SetText(GetString(SI_JACK_OF_ALL_TRADES_MENU_MISC))
-                    end, -- function to call when this custom control was created (optional)
-                    refreshFunc = function(customControl) end, -- function to call when panel/controls refresh (optional)
-                    width = "full", -- or "half" (optional)
-                    minHeight = function() return 18 end, --or number for the minimum height of this control. Default: 26 (optional)
-                    maxHeight = function() return 18 end, --or number for the maximum height of this control. Default: 4 * minHeight (optional)
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("professionalUpkeep")),
-                    getFunc = function() return self.savedVariables.enable.professionalUpkeep end,
-                    setFunc = function(value) self.savedVariables.enable.professionalUpkeep = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("professionalUpkeep"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("rationer")),
-                    getFunc = function() return self.savedVariables.enable.rationer end,
-                    setFunc = function(value) self.savedVariables.enable.rationer = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("rationer"), 1000),
-                    width = "half"
-                },
-                {
-                    type = "checkbox",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("liquidEfficiency")),
-                    getFunc = function() return self.savedVariables.enable.liquidEfficiency end,
-                    setFunc = function(value) self.savedVariables.enable.liquidEfficiency = value end,
-                    tooltip = GetChampionSkillDescription(self.GetSkillId("liquidEfficiency"), 1000),
-                    width = "half"
-                },
             },
         },
         {
@@ -1015,14 +763,6 @@ function JackOfAllTrades:InitMenu()
             getFunc = function() return self.savedVariables.homemakerCorpses end,
             setFunc = function(value) self.savedVariables.homemakerCorpses = value end,
             tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_HM_CORPSES) .. JackOfAllTrades.getHomemakerLootables(),
-            width = "full"
-        },
-        {
-            type = "checkbox",
-            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_HM_PAIR,
-            getFunc = function() return self.savedVariables.thHmPair end,
-            setFunc = function(value) self.savedVariables.thHmPair = value end,
-            tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_TH_HM_PAIR),
             width = "full"
         },
         {
@@ -1073,33 +813,6 @@ function JackOfAllTrades:InitMenu()
                 },
                 {
                     type = "custom",
-                    name = SI_JACK_OF_ALL_TRADES_MENU_CRAFTING,
-                    --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
-                    createFunc = function(customControl) 
-                        local wm = WINDOW_MANAGER
-                        customControl.header = wm:CreateControlFromVirtual(nil, customControl, "ZO_Options_SectionTitleLabel")
-                        local header = customControl.header
-                        --header:SetAnchor(TOPLEFT, divider, BOTTOMLEFT)
-                        header:SetAnchor(TOPLEFT)
-                        header:SetFont("ZoFontHeader2")
-                        header:SetText(GetString(SI_JACK_OF_ALL_TRADES_MENU_CRAFTING))
-                    end, -- function to call when this custom control was created (optional)
-                    refreshFunc = function(customControl) end, -- function to call when panel/controls refresh (optional)
-                    width = "full", -- or "half" (optional)
-                    minHeight = function() return 18 end, --or number for the minimum height of this control. Default: 26 (optional)
-                    maxHeight = function() return 18 end, --or number for the maximum height of this control. Default: 4 * minHeight (optional)
-                },
-                {
-                    type = "dropdown",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("meticulousDisassembly")),
-                    choices = {1,2,3,4},
-                    getFunc = function() return self.savedVariables.slotIndex.meticulousDisassembly end,
-                    setFunc = function(value) self.savedVariables.slotIndex.meticulousDisassembly = value refreshConflict("meticulousDisassembly") end,
-                    sort = "numeric-up",
-                    width = "half"
-                },
-                {
-                    type = "custom",
                     name = SI_JACK_OF_ALL_TRADES_MENU_HARVESTING,
                     --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
                     createFunc = function(customControl) 
@@ -1122,51 +835,6 @@ function JackOfAllTrades:InitMenu()
                     choices = {1,2,3,4},
                     getFunc = function() return self.savedVariables.slotIndex.masterGatherer end,
                     setFunc = function(value) self.savedVariables.slotIndex.masterGatherer = value refreshConflict("masterGatherer") end,
-                    sort = "numeric-up",
-                    width = "half"
-                },
-                {
-                    type = "dropdown",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("plentifulHarvest")),
-                    choices = {1,2,3,4},
-                    getFunc = function() return self.savedVariables.slotIndex.plentifulHarvest end,
-                    setFunc = function(value) self.savedVariables.slotIndex.plentifulHarvest = value refreshConflict("plentifulHarvest") end,
-                    sort = "numeric-up",
-                    width = "half"
-                },
-                {
-                    type = "custom",
-                    name = SI_JACK_OF_ALL_TRADES_MENU_LOOTING,
-                    --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
-                    createFunc = function(customControl) 
-                        local wm = WINDOW_MANAGER
-                        customControl.header = wm:CreateControlFromVirtual(nil, customControl, "ZO_Options_SectionTitleLabel")
-                        local header = customControl.header
-                        --header:SetAnchor(TOPLEFT, divider, BOTTOMLEFT)
-                        header:SetAnchor(TOPLEFT)
-                        header:SetFont("ZoFontHeader2")
-                        header:SetText(GetString(SI_JACK_OF_ALL_TRADES_MENU_LOOTING))
-                    end, -- function to call when this custom control was created (optional)
-                    refreshFunc = function(customControl) end, -- function to call when panel/controls refresh (optional)
-                    width = "full", -- or "half" (optional)
-                    minHeight = function() return 18 end, --or number for the minimum height of this control. Default: 26 (optional)
-                    maxHeight = function() return 18 end, --or number for the maximum height of this control. Default: 4 * minHeight (optional)
-                },
-                {
-                    type = "dropdown",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("treasureHunter")),
-                    choices = {1,2,3,4},
-                    getFunc = function() return self.savedVariables.slotIndex.treasureHunter end,
-                    setFunc = function(value) self.savedVariables.slotIndex.treasureHunter = value refreshConflict("treasureHunter") end,
-                    sort = "numeric-up",
-                    width = "half"
-                },
-                {
-                    type = "dropdown",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("homemaker")),
-                    choices = {1,2,3,4},
-                    getFunc = function() return self.savedVariables.slotIndex.homemaker end,
-                    setFunc = function(value) self.savedVariables.slotIndex.homemaker = value refreshConflict("homemaker") end,
                     sort = "numeric-up",
                     width = "half"
                 },
@@ -1226,24 +894,6 @@ function JackOfAllTrades:InitMenu()
                 },
                 {
                     type = "dropdown",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("infamous")),
-                    choices = {1,2,3,4},
-                    getFunc = function() return self.savedVariables.slotIndex.infamous end,
-                    setFunc = function(value) self.savedVariables.slotIndex.infamous = value refreshConflict("infamous") end,
-                    sort = "numeric-up",
-                    width = "half"
-                },
-                {
-                    type = "dropdown",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("cutpursesArt")),
-                    choices = {1,2,3,4},
-                    getFunc = function() return self.savedVariables.slotIndex.cutpursesArt end,
-                    setFunc = function(value) self.savedVariables.slotIndex.cutpursesArt = value refreshConflict("cutpursesArt") end,
-                    sort = "numeric-up",
-                    width = "half"
-                },
-                {
-                    type = "dropdown",
                     name = GetFormattedChampionSkillName(self.GetSkillId("sustainingShadows")),
                     choices = {1,2,3,4},
                     getFunc = function() return self.savedVariables.slotIndex.sustainingShadows end,
@@ -1284,51 +934,6 @@ function JackOfAllTrades:InitMenu()
                     choices = {1,2,3,4},
                     getFunc = function() return self.savedVariables.slotIndex.warMount end,
                     setFunc = function(value) self.savedVariables.slotIndex.warMount = value refreshConflict("warMount") end,
-                    sort = "numeric-up",
-                    width = "half"
-                },
-                {
-                    type = "custom",
-                    name = SI_JACK_OF_ALL_TRADES_MENU_MISC,
-                    --reference = "MyAddonCustomControl", -- unique name for your control to use as reference (optional)
-                    createFunc = function(customControl) 
-                        local wm = WINDOW_MANAGER
-                        customControl.header = wm:CreateControlFromVirtual(nil, customControl, "ZO_Options_SectionTitleLabel")
-                        local header = customControl.header
-                        --header:SetAnchor(TOPLEFT, divider, BOTTOMLEFT)
-                        header:SetAnchor(TOPLEFT)
-                        header:SetFont("ZoFontHeader2")
-                        header:SetText(GetString(SI_JACK_OF_ALL_TRADES_MENU_MISC))
-                    end, -- function to call when this custom control was created (optional)
-                    refreshFunc = function(customControl) end, -- function to call when panel/controls refresh (optional)
-                    width = "full", -- or "half" (optional)
-                    minHeight = function() return 18 end, --or number for the minimum height of this control. Default: 26 (optional)
-                    maxHeight = function() return 18 end, --or number for the maximum height of this control. Default: 4 * minHeight (optional)
-                },
-                {
-                    type = "dropdown",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("professionalUpkeep")),
-                    choices = {1,2,3,4},
-                    getFunc = function() return self.savedVariables.slotIndex.professionalUpkeep end,
-                    setFunc = function(value) self.savedVariables.slotIndex.professionalUpkeep = value refreshConflict("professionalUpkeep") end,
-                    sort = "numeric-up",
-                    width = "half"
-                },
-                {
-                    type = "dropdown",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("rationer")),
-                    choices = {1,2,3,4},
-                    getFunc = function() return self.savedVariables.slotIndex.rationer end,
-                    setFunc = function(value) self.savedVariables.slotIndex.rationer = value refreshConflict("rationer") end,
-                    sort = "numeric-up",
-                    width = "half"
-                },
-                {
-                    type = "dropdown",
-                    name = GetFormattedChampionSkillName(self.GetSkillId("liquidEfficiency")),
-                    choices = {1,2,3,4},
-                    getFunc = function() return self.savedVariables.slotIndex.liquidEfficiency end,
-                    setFunc = function(value) self.savedVariables.slotIndex.liquidEfficiency = value refreshConflict("liquidEfficiency") end,
                     sort = "numeric-up",
                     width = "half"
                 },

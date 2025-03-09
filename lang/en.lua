@@ -52,12 +52,11 @@ ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_AFTER_CD", "Automatically slo
 ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_ALTER_AFTER_CD", "Be notifed after the CP cooldown ends")
 ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_ALWAYS_ALERT_AFTER_CD", "Always be notifed after the CP cooldown ends")
 
-ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_HM_CORPSES", "Slot homemaker when looting corpses")
-ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_HM_PAIR", "Slot treasure hunter and homemaker as a pair")
-ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_MD_WRITS", "Slot Meticulous Disassembly whilst doing writs")
-ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_LE_TRASH_POTS", "Slot liquid efficiency when using trash pots")
-ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_DUNGEON", "Slot treasure hunter when you enter a dungeon")
-ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_RATIONER_IN_BRP", "Slot Rationer when you enter nBRP")
+ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_HM_CORPSES", "Check homemaker when looting corpses")
+ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_MD_WRITS", "Check Meticulous Disassembly whilst doing writs")
+ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_LE_TRASH_POTS", "Check liquid efficiency when using trash pots")
+ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_DUNGEON", "Check treasure hunter when you enter a dungeon")
+ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_SLOT_RATIONER_IN_BRP", "Check Rationer when you enter nBRP")
 
 ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_CATEGORY_ALLOCATING_POINTS", "Toggle automatically allocating points")
 ZO_CreateStringId("SI_JACK_OF_ALL_TRADES_MENU_ALLOCATING_POINTS_DESCRIPTION", "If you have the points spare Jack of all Trades can allocate points into the star you are missing as well as all the stars needed to reach the star.\nIf you already have your points spend Jack of all Trades will not re- allocate your points or spend 3000 gold etc.")

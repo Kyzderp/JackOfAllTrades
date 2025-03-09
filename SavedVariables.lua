@@ -9,7 +9,6 @@ local defaultData = {
 	debug = false,
 	showCooldownError = true,
 	homemakerCorpses = false,
-	thHmPair = false,
 	slotSkillsAfterCooldownEnds = true,
 	slotMdWhilstDoingWrits = true,
 	slotLeTrashPots = true,
@@ -42,52 +41,25 @@ local defaultData = {
 		sustainingShadows = false
 	},
 	enable = {
-		meticulousDisassembly = true,
-		treasureHunter = true,
-		professionalUpkeep = true,
 		reelTechnique = true,
 		anglersInstinct = true,
 		masterGatherer = true,
-		plentifulHarvest = true,
-		cutpursesArt = true,
-		infamous = true,
-		homemaker = true,
-		rationer = true,
-		liquidEfficiency = true,
 		giftedRider = false,
 		warMount = false,
 		sustainingShadows = true
 	},
 	notification = {
-		meticulousDisassembly = true,
-		treasureHunter = true,
-		professionalUpkeep = true,
 		reelTechnique = true,
 		anglersInstinct = true,
 		masterGatherer = true,
-		plentifulHarvest = true,
-		cutpursesArt = true,
-		infamous = true,
-		homemaker = true,
-		rationer = true,
-		liquidEfficiency = true,
 		giftedRider = true,
 		warMount = true,
 		sustainingShadows = true
 	},
 	slotIndex = {
-		meticulousDisassembly = 4,
-		treasureHunter = 4,
-		professionalUpkeep = 4,
 		reelTechnique = 4,
 		anglersInstinct = 3,
 		masterGatherer = 4,
-		plentifulHarvest = 3,
-		cutpursesArt = 4,
-		infamous = 4,
-		homemaker = 3,
-		rationer = 4,
-		liquidEfficiency = 3,
 		giftedRider = 4,
 		warMount = 3,
 		sustainingShadows = 3
@@ -102,6 +74,16 @@ function JackOfAllTrades.InitSavedVariables()
 	-- Load in the savedVariables --
 	-------------------------------------------------------------------------------------------------
 	JackOfAllTrades.savedVariables = ZO_SavedVars:NewAccountWide("JackOfAllTradesData", JackOfAllTrades.variableVersion, nil, defaultData)
+
+	-- Post-U45: delete the now-passive stars from savedvars to save space, and also to hopefully not break things
+	local nowPassive = {"meticulousDisassembly", "treasureHunter", "professionalUpkeep", "plentifulHarvest", "cutpursesArt", "infamous", "homemaker", "rationer", "liquidEfficiency"}
+	for _, name in ipairs(nowPassive) do
+		JackOfAllTrades.savedVariables.enable[name] = nil
+		JackOfAllTrades.savedVariables.notification[name] = nil
+		JackOfAllTrades.savedVariables.slotIndex[name] = nil
+	end
+	JackOfAllTrades.savedVariables.thHmPair = nil
+
 	-------------------------------------------------------------------------------------------------
 	-- If we reloadui whilst in combat, we still need to return the skill after combat ends --
 	-------------------------------------------------------------------------------------------------
