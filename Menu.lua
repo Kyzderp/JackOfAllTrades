@@ -602,6 +602,45 @@ function JackOfAllTrades:InitMenu()
             width = "full"
         },
         {
+            type = "checkbox",
+            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_HM_CORPSES,
+            getFunc = function() return self.savedVariables.homemakerCorpses end,
+            setFunc = function(value) self.savedVariables.homemakerCorpses = value end,
+            tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_HM_CORPSES) .. JackOfAllTrades.getHomemakerLootables(),
+            width = "full"
+        },
+        {
+            type = "checkbox",
+            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_MD_WRITS,
+            getFunc = function() return self.savedVariables.slotMdWhilstDoingWrits end,
+            setFunc = function(value) self.savedVariables.slotMdWhilstDoingWrits = value end,
+            tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_MD_WRIT),
+            width = "full"
+        },
+        {
+            type = "checkbox",
+            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_LE_TRASH_POTS,
+            getFunc = function() return self.savedVariables.slotLeTrashPots end,
+            setFunc = function(value) self.savedVariables.slotLeTrashPots = value end,
+            width = "full"
+        },
+        {
+            type = "checkbox",
+            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_DUNGEON,
+            getFunc = function() return self.savedVariables.slotThInDungeon end,
+            setFunc = function(value) self.savedVariables.slotThInDungeon = value end,
+            tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_TH_HM_PAIR_DUN),
+            width = "full"
+        },
+        {
+            type = "checkbox",
+            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_RATIONER_IN_BRP,
+            getFunc = function() return self.savedVariables.slotRationerInGrindSpot end,
+            setFunc = function(value) self.savedVariables.slotRationerInGrindSpot = value end,
+            tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_RATIONER_NBRP),
+            width = "full"
+        },
+        {
             type = "header",
             name = SI_JACK_OF_ALL_TRADES_MENU_TOGGLE,
             width = "full"
@@ -756,45 +795,6 @@ function JackOfAllTrades:InitMenu()
                     width = "half"
                 },
             },
-        },
-        {
-            type = "checkbox",
-            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_HM_CORPSES,
-            getFunc = function() return self.savedVariables.homemakerCorpses end,
-            setFunc = function(value) self.savedVariables.homemakerCorpses = value end,
-            tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_HM_CORPSES) .. JackOfAllTrades.getHomemakerLootables(),
-            width = "full"
-        },
-        {
-            type = "checkbox",
-            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_MD_WRITS,
-            getFunc = function() return self.savedVariables.slotMdWhilstDoingWrits end,
-            setFunc = function(value) self.savedVariables.slotMdWhilstDoingWrits = value end,
-            tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_MD_WRIT),
-            width = "full"
-        },
-        {
-            type = "checkbox",
-            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_LE_TRASH_POTS,
-            getFunc = function() return self.savedVariables.slotLeTrashPots end,
-            setFunc = function(value) self.savedVariables.slotLeTrashPots = value end,
-            width = "full"
-        },
-        {
-            type = "checkbox",
-            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_DUNGEON,
-            getFunc = function() return self.savedVariables.slotThInDungeon end,
-            setFunc = function(value) self.savedVariables.slotThInDungeon = value end,
-            tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_TH_HM_PAIR_DUN),
-            width = "full"
-        },
-        {
-            type = "checkbox",
-            name = SI_JACK_OF_ALL_TRADES_MENU_SLOT_RATIONER_IN_BRP,
-            getFunc = function() return self.savedVariables.slotRationerInGrindSpot end,
-            setFunc = function(value) self.savedVariables.slotRationerInGrindSpot = value end,
-            tooltip = GetString(SI_JACK_OF_ALL_TRADES_MENU_TOOLTIP_RATIONER_NBRP),
-            width = "full"
         },
         {   
             type = "submenu",
