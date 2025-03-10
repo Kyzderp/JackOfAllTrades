@@ -4,7 +4,7 @@
 JackOfAllTrades = {
 	name = "JackOfAllTrades",
 	author = '@CyberOnEso, @MMasing',
-	version = '1.2.33',
+	version = '2.0.0',
 }
 
 JackOfAllTrades.colours = {

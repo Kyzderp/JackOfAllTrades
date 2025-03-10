@@ -1,7 +1,7 @@
-## APIVersion: 101044 101045
+## APIVersion: 101045
 ## Title: |c9CD04CJack of all trades|r
-## Version: 1.2.33
-## AddOnVersion: 51
+## Version: 2.0.0
+## AddOnVersion: 52
 ## Author: |c5959D5@CyberOnEso & @MMasing|r, 
 ## Description: |c9CD04CAutomatically adjusts your green champion bar depending on what you are doing, and sets it back to normal right after.         |rWill not respec your champion points or charge you 3000 gold.
 ## SavedVariables: JackOfAllTradesData
