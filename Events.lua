@@ -259,7 +259,7 @@ end
 local function OpenStore(e)
 	if not CanStoreRepair() then return false end
 	if GetRepairAllCost() == 0 then return false end
-	if not JackOfAllTrades.savedVariables.enable.professionalUpkeep then return false end
+	if not JackOfAllTrades.savedVariables.warnings.professionalUpkeep then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(professionalUpkeep.id, professionalUpkeep.index)
 	if result == nil then
 		SendWarning("professionalUpkeep")
@@ -276,7 +276,7 @@ local function StartGathering()
 		masterGathererResult = JackOfAllTrades.AddCPNodeToQueue(masterGatherer.id, GetDesiredSlot(masterGatherer.id, plentifulHarvest.id, masterGatherer.index))
 	end
 
-	if JackOfAllTrades.savedVariables.enable.plentifulHarvest then 
+	if JackOfAllTrades.savedVariables.warnings.plentifulHarvest then
 		plentifulHarvestResult = JackOfAllTrades.AddCPNodeToQueue(plentifulHarvest.id, GetDesiredSlot(plentifulHarvest.id, masterGatherer.id, plentifulHarvest.index))
 	end
 	
@@ -291,30 +291,8 @@ local function StartGathering()
 	if plentifulHarvestResult == nil then SendWarning("plentifulHarvest") end
 end
 
-local function SlotThHmPair()
-	if not JackOfAllTrades.savedVariables.enable.treasureHunter and not JackOfAllTrades.savedVariables.enable.homemaker then return end
-	local treasureHunterResult = false
-	local homemakerResult = false
-	if JackOfAllTrades.savedVariables.enable.treasureHunter then 
-		treasureHunterResult = JackOfAllTrades.AddCPNodeToQueue(treasureHunter.id, GetDesiredSlot(treasureHunter.id, homemaker.id, treasureHunter.index))
-	end
-	if JackOfAllTrades.savedVariables.enable.homemaker then 
-		homemakerResult = JackOfAllTrades.AddCPNodeToQueue(homemaker.id, GetDesiredSlot(homemaker.id, treasureHunter.id, homemaker.index))
-	end
-	if treasureHunterResult or homemakerResult then
-		local slotResult = JackOfAllTrades.SlotAllStarsInQueue()
-		if slotResult ~= false then
-			if treasureHunterResult then SendNotification("treasureHunter") end
-			if homemakerResult then SendNotification("homemaker") end
-		end
-	end
-	if treasureHunterResult == nil then SendWarning("treasureHunter") end
-	if homemakerResult == nil then SendWarning("homemaker") end
-end
-
 local function StartLooting()
-	if JackOfAllTrades.savedVariables.thHmPair then SlotThHmPair() return false end
-	if not JackOfAllTrades.savedVariables.enable.homemaker then return false end
+	if not JackOfAllTrades.savedVariables.warnings.homemaker then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(homemaker.id, homemaker.index)
 	if result == nil then
 		SendWarning("homemaker")
@@ -322,8 +300,7 @@ local function StartLooting()
 end
 
 local function StartOpeningChest()
-	if JackOfAllTrades.savedVariables.thHmPair then SlotThHmPair() return false end
-	if not JackOfAllTrades.savedVariables.enable.treasureHunter then return false end
+	if not JackOfAllTrades.savedVariables.warnings.treasureHunter then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(treasureHunter.id, treasureHunter.index)
 	if result == nil then
 		SendWarning("treasureHunter")
@@ -331,7 +308,7 @@ local function StartOpeningChest()
 end
 
 local function StartPickpocketing()
-	if not JackOfAllTrades.savedVariables.enable.cutpursesArt then return false end
+	if not JackOfAllTrades.savedVariables.warnings.cutpursesArt then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(cutpursesArt.id, cutpursesArt.index)
 	if result == nil then
 		SendWarning("cutpursesArt")
@@ -339,7 +316,7 @@ local function StartPickpocketing()
 end
 
 local function OpenFence()
-	if not JackOfAllTrades.savedVariables.enable.infamous then return false end
+	if not JackOfAllTrades.savedVariables.warnings.infamous then return false end
 	local result = JackOfAllTrades.AddCPNodeToQueue(infamous.id, infamous.index)
 	if result == nil then
 		SendWarning("infamous")
@@ -357,7 +334,7 @@ local function OpenCraftingStation(e, craft_skill, craft_type)
 	-- Check the crafting table supports MD
 	if craft_skill ~= 0 and craft_skill ~= 1 and craft_skill ~= 2 and craft_skill ~= 6 and craft_skill ~= 7 then return end
 
-	if not JackOfAllTrades.savedVariables.enable.meticulousDisassembly then return false end
+	if not JackOfAllTrades.savedVariables.warnings.meticulousDisassembly then return false end
 
 	if not JackOfAllTrades.savedVariables.slotMdWhilstDoingWrits then 
 		if DoesPlayerHaveAWritQuest() then
@@ -420,16 +397,16 @@ local function QuickSlotChanged(e, slot)
 	local consumableType, _ = GetItemLinkItemType(itemLink)
 	-- Check if we need to do anything
 	if consumableType ~= ITEMTYPE_FOOD and consumableType ~= ITEMTYPE_DRINK and consumableType ~= ITEMTYPE_POTION and consumableType ~= ITEMTYPE_POTION_BASE then return false end
-	if not JackOfAllTrades.savedVariables.enable.rationer and not JackOfAllTrades.savedVariables.enable.liquidEfficiency then return end
+	if not JackOfAllTrades.savedVariables.warnings.rationer and not JackOfAllTrades.savedVariables.warnings.liquidEfficiency then return end
 
 	local rationerResult = false
 	local liquidEfficiencyResult = false
 
-	if JackOfAllTrades.savedVariables.enable.rationer and (consumableType == ITEMTYPE_FOOD or consumableType == ITEMTYPE_DRINK) then
+	if JackOfAllTrades.savedVariables.warnings.rationer and (consumableType == ITEMTYPE_FOOD or consumableType == ITEMTYPE_DRINK) then
 		rationerResult = JackOfAllTrades.AddCPNodeToQueue(rationer.id, rationer.index)
 	end
 
-	if JackOfAllTrades.savedVariables.enable.liquidEfficiency and (consumableType == ITEMTYPE_POTION or consumableType == ITEMTYPE_POTION_BASE) then
+	if JackOfAllTrades.savedVariables.warnings.liquidEfficiency and (consumableType == ITEMTYPE_POTION or consumableType == ITEMTYPE_POTION_BASE) then
 		liquidEfficiencyResult = JackOfAllTrades.AddCPNodeToQueue(liquidEfficiency.id, liquidEfficiency.index)
 	end
 
