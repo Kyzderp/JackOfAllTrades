@@ -349,7 +349,7 @@ function JackOfAllTrades.AddCPNodeToQueue(skillId, skillIndex)
 
 	-- For passive skills (post-U45), check if the max points are allocated
 	if (not CanChampionSkillTypeBeSlotted(GetChampionSkillType(skillId))) then
-		if (GetNumPointsSpentOnChampionSkill(skillId) < GetMaxPossiblePointsInChampionSkill(skillId)) then
+		if (GetNumPointsSpentOnChampionSkill(skillId) < GetChampionSkillMaxPoints(skillId)) then
 			return nil
 		end
 		return false

@@ -171,7 +171,7 @@ local function SendWarning(variableSkillName)
 	if not DoesCurrentCampaignRulesetAllowChampionPoints() then return false end
 
 	local championSkill = skillData[variableSkillName]
-	local isSlottable = CanChampionSkillTypeBeSlotted(GetChampionSkillType())
+	local isSlottable = CanChampionSkillTypeBeSlotted(GetChampionSkillType(championSkill.id))
 	
 	-- Try allocating points then slot it
 	if JackOfAllTrades.AttemptToAllocatePointsIntoCP(championSkill.id) then

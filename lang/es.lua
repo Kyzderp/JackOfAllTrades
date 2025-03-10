@@ -5,6 +5,7 @@
 SafeAddString(SI_JACK_OF_ALL_TRADES_METICULOUS_DISASSEMBLY_BENEFIT, "resultados de refinamiento mejorados");
 SafeAddString(SI_JACK_OF_ALL_TRADES_TREASURE_HUNTER_BENEFIT, "objetos en cofres de más calidad");
 SafeAddString(SI_JACK_OF_ALL_TRADES_NOT_ENOUGH_POINTS_WARNING, "No has asignado suficientes puntos en la estrella <<C:1>> para poder equiparla.");
+SafeAddString(SI_JACK_OF_ALL_TRADES_NOT_MAX_POINTS_WARNING, "No has asignado puntos máximos en la estrella <<C:1>>.");
 SafeAddString(SI_JACK_OF_ALL_TRADES_SLOTTED, "equipado");
 SafeAddString(SI_JACK_OF_ALL_TRADES_DELAYED_SLOTTED, "se equipará en <<1>> segundos");
 SafeAddString(SI_JACK_OF_ALL_TRADES_COOLDOWN_DISABLED, "se equipará en <<1>> segundos");
@@ -52,12 +53,12 @@ SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_AFTER_CD, "Equipar automáticament
 SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_ALTER_AFTER_CD, "Notificar al acabar el tiempo de espera");
 SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_ALWAYS_ALERT_AFTER_CD, "Notificar siempre que acabe el tiempo de espera");
 
-SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_HM_CORPSES, "Equipar Hogareño al saquear cadáveres");
-SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_HM_PAIR, "Equipar Hogareño y Cazador de tesoros a la vez");
-SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_MD_WRITS, "Equipar Deconstrucción meticulosa al hacer encargos");
-SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_LE_TRASH_POTS, "Equipar Eficacia líquida al usar pociones genéricas");
-SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_DUNGEON, "Equipar Cazador de tesoros al entrar en una mazmorra");
-SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_RATIONER_IN_BRP, "Equipar Racionamiento al entrar en nBRP");
+SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_HM_CORPSES, "Verificar Hogareño al saquear cadáveres");
+SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_HM_PAIR, "Verificar Hogareño y Cazador de tesoros a la vez");
+SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_MD_WRITS, "Verificar Deconstrucción meticulosa al hacer encargos");
+SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_LE_TRASH_POTS, "Verificar Eficacia líquida al usar pociones genéricas");
+SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_TH_DUNGEON, "Verificar Cazador de tesoros al entrar en una mazmorra");
+SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_SLOT_RATIONER_IN_BRP, "Verificar Racionamiento al entrar en nBRP");
 
 -- Categories
 SafeAddString(SI_JACK_OF_ALL_TRADES_MENU_RIDING, "Equitación");
